@@ -4,8 +4,8 @@ as well as its next node in the List."""
 
 class ListNode:
     def __init__(self, value, prev=None, next=None):
-        self.value = value
-        self.prev = prev
+        self.value = value 
+        self.prev = prev # having both pointers tells us doubly linked list
         self.next = next
 
     """Wrap the given value in a ListNode and insert it
@@ -52,7 +52,19 @@ class DoublyLinkedList:
     as the new head of the list. Don't forget to handle 
     the old head node's previous pointer accordingly."""
     def add_to_head(self, value):
-        pass
+        new_node = ListNode(value, None, None)
+        self.length += 1
+
+        if not self.head and not self.tail:  #i.e. this list is empty
+            self.head = new_node
+            self.tail = new_node # this new node is going to be both the head and tail
+        else:
+            # the new head's next node is equal to the current head
+            new_node.next = self.head
+            # the current head's previous node equals our new head
+            self.head.prev = new_node
+            # we define this last because if we don't, we lose our references and thus the values.  Similar to having to use a temp variable when doing swaps
+            self.head = new_node
 
     """Removes the List's current head node, making the
     current head's next node the new head of the List.
@@ -64,7 +76,19 @@ class DoublyLinkedList:
     as the new tail of the list. Don't forget to handle 
     the old tail node's next pointer accordingly."""
     def add_to_tail(self, value):
-        pass
+        new_node = ListNode(value, None, None)
+        self.length += 1
+
+        if not self.head and not self.tail:  #i.e. this list is empty
+            self.head = new_node
+            self.tail = new_node # this new node is going to be both the head and tail
+        else:
+            # the new tail's prev node is equal to the current tail
+            new_node.prev = self.tail
+            # the current tail's next node equals our new tail
+            self.tail.next = new_node
+            # we define this last because if we don't, we lose our references and thus the values.  Similar to having to use a temp variable when doing swaps
+            self.tail = new_node
 
     """Removes the List's current tail node, making the 
     current tail's previous node the new tail of the List.
