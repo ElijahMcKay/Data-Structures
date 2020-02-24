@@ -10,7 +10,7 @@ Topics:
 
 Stretch Goals:
  * Generic Heaps
- * AVL Trees 
+ * AVL Trees
  * Heaps
 
 ## Tasks
