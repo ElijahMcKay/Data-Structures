@@ -8,6 +8,8 @@ class ListNode:
         self.prev = prev # having both pointers tells us doubly linked list
         self.next = next
 
+    def __str__(self):
+        return f"{self.value}"
     """Wrap the given value in a ListNode and insert it
     after this node. Note that this node could already
     have a next node it is point to."""
@@ -34,6 +36,8 @@ class ListNode:
         if self.next:
             self.next.prev = self.prev
 
+        return self
+
 
 """Our doubly-linked list class. It holds references to
 the list's head and tail nodes."""
@@ -43,10 +47,17 @@ class DoublyLinkedList:
     def __init__(self, node=None):
         self.head = node
         self.tail = node
+        # isn't usually required, just using this to play around and understand this better
+        self.node = node
         self.length = 1 if node is not None else 0
 
     def __len__(self):
         return self.length
+
+    
+    def __str__(self):
+        return f"{self.node}"
+
 
     """Wraps the given value in a ListNode and inserts it
     as the new head of the list. Don't forget to handle 
@@ -65,6 +76,8 @@ class DoublyLinkedList:
             self.head.prev = new_node
             # we define this last because if we don't, we lose our references and thus the values.  Similar to having to use a temp variable when doing swaps
             self.head = new_node
+
+        return new_node
 
     """Removes the List's current head node, making the
     current head's next node the new head of the List.
@@ -92,6 +105,8 @@ class DoublyLinkedList:
             self.tail.next = new_node
             # we define this last because if we don't, we lose our references and thus the values.  Similar to having to use a temp variable when doing swaps
             self.tail = new_node
+
+        return new_node
 
     """Removes the List's current tail node, making the 
     current tail's previous node the new tail of the List.
@@ -145,7 +160,7 @@ class DoublyLinkedList:
         # otherwise
         else:
             node.delete()
-
+        
     """Returns the highest value currently in the list"""
     def get_max(self):
         if self.head is None:
