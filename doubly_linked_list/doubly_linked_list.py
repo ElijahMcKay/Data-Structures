@@ -85,8 +85,7 @@ class DoublyLinkedList:
 
         self.delete(old_head)
 
-        self.length -= 1
-        
+
         return old_head.value
 
     """Wraps the given value in a ListNode and inserts it
@@ -105,10 +104,10 @@ class DoublyLinkedList:
             self.tail = new_node
 
         else:
-            # assigning old tail's next to new_node
-            self.tail.next = new_node
             # assigning new tail's prev to old tail
             new_node.prev = self.tail
+            # assigning old tail's next to new_node
+            self.tail.next = new_node
             # reassigning self.tail to new_node
             self.tail = new_node
 
@@ -119,12 +118,12 @@ class DoublyLinkedList:
     current tail's previous node the new tail of the List.
     Returns the value of the removed Node."""
     def remove_from_tail(self):
-
+        # capturing value before deleting it
         value = self.tail.value
+        # deleting
         self.delete(self.tail)
 
-        self.length -= 1
-
+        # returning node that was deleted
         return value
 
     """Removes the input node from its current spot in the 
@@ -183,18 +182,18 @@ class DoublyLinkedList:
         # all other cases
         else:
             node.delete()
-        
+
     """Returns the highest value currently in the list"""
     def get_max(self):
         # if LL is empty, can't return anything
         if self.head is None:
             return None
-        
+
         # immediately set the max value to the first positions value (the head)
         max_value = self.head.value
         # another value we use to iterate, again starting at the first position
         current = self.head
-        
+
         # looping until we hit the end of the LL, i.e. current no longer has a .next
         while current:
             if current.value > max_value:
@@ -202,5 +201,5 @@ class DoublyLinkedList:
 
             # iterating after loop logic done, equivalent of something like i++
             current = current.next
-        
+
         return max_value
