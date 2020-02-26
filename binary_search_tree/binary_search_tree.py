@@ -59,21 +59,63 @@ class BinarySearchTree:
         if value is less than node, go left and repeat.  If no left child, return none
         if value is >= node, go right and repeat.  If no left child, return none
         """
-        # if self.value == target:
-        #     return self
-        # else
+        # once we have it, return
+        if self.value == target:
+
+            return True
+
+        #otherwise, carry on
+        else:
+            # if target is larger
+            if self.value < target:
+                # and there is nowhere else to search
+                if not self.right:
+                    # return None
+                    return None
+
+                # recursively call the contains() function to continue searching
+                return self.right.contains(target)
+
+            # if target is smaller
+            else:
+                # and there is nowhere else to search
+                if not self.left:
+                    # return none
+                    return None
+
+                # recursively call the contains() function to continue searching
+                return self.left.contains(target)
+
 
     # Return the maximum value found in the tree
     def get_max(self):
         """
         keep going right until no more right
         """
-        pass
+        # if we can't go right anymore
+        if not self.right:
+            # return the current value, bc it's the largest
+            return self.value
+
+        # if we can keep going right, recursively call getmax to the right
+        return self.right.get_max()
 
     # Call the function `cb` on the value of each node
     # You may use a recursive or iterative approach
     def for_each(self, cb):
-        pass
+        # call function on root
+        if self.value:
+            cb(self.value)
+
+        # call recursively call for_each if right node exists
+        if self.right:
+            # not returning this, because we want to function to keep going
+            self.right.for_each(cb)
+
+        # call recursively call for_each if left node exists
+        if self.left:
+            # not returning this, because we want to function to keep going
+            self.left.for_each(cb)
 
     # DAY 2 Project -----------------------
 
