@@ -103,7 +103,7 @@ class BinarySearchTree:
     # Call the function `cb` on the value of each node
     # You may use a recursive or iterative approach
     def for_each(self, cb):
-        # call function on root
+        # call function on current node
         if self.value:
             cb(self.value)
 
@@ -121,26 +121,119 @@ class BinarySearchTree:
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
-    def in_order_print(self, node):
-        pass
+    def in_order_print(self, node=None):
+
+        if self.left:
+            # don't need an input node bc we print everything in this tree from low to high regardless of the order
+            self.left.in_order_print()
+
+        print(self.value)
+
+        if self.right:
+            self.right.in_order_print()
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
+
+
     def bft_print(self, node):
-        pass
+        """
+        Iterative approach notes from lecture
+        Make a queue
+        add root to queue
+        while queue.length > 0
+        immediately pop root and save to a temp var (temp = queue.dequeue()) - with a queue, popping doesn't have to happen immediately
+        Do the thing
+        if temp.left add to queue
+        if temp.right add to queue
+        """
+        # instantiating queue and adding initial node
+        level_queue = Queue()
+        level_queue.enqueue(node)
+
+        # while the queue has stuff in it
+        while level_queue.size > 0:
+            # removing current node and save it as current node
+            current_node = level_queue.dequeue()
+
+            # printing each current node
+            print(current_node.value)
+
+            # if there is a node to the right, also add that to queue
+            if current_node.right:
+                level_queue.enqueue(current_node.right)
+
+            # if there is a node to the right, also add that to queue
+            if current_node.left:
+                level_queue.enqueue(current_node.left)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        """
+        Iterative approach notes from lecture
+        Make a stack
+        add root to stack
+        while stack.length > 0
+        immediately pop root and save to a temp var (temp = stack.pop())
+        Do the thing
+        if temp.left add to stack
+        if temp.right add to stack
+        """
+        # instantiating stack
+        level_stack = Stack()
+        # pushing initial node to stack
+        level_stack.push(node)
+
+        # while something is in the stack
+        while level_stack.len() > 0:
+            # doing this after when enter loop, otherwise it will be 0 and it won't start the loop
+            current_node = level_stack.pop()
+            print(current_node.value)
+
+            # if there is a node to the right, push that onto the stack
+            if current_node.right:
+                level_stack.push(current_node.right)
+
+            # if there is a node to the left, push that onto the stack
+            if current_node.left:
+                level_stack.push(current_node.left)
 
     # STRETCH Goals -------------------------
     # Note: Research may be required
 
     # Print Pre-order recursive DFT
-    def pre_order_dft(self, node):
-        pass
+    def pre_order_dft(self, node=None):
+
+        print(self.value)
+
+        if self.left:
+            # don't need an input node bc we print everything in this tree from low to high regardless of the order
+            self.left.pre_order_dft()
+
+        if self.right:
+            self.right.pre_order_dft()
 
     # Print Post-order recursive DFT
-    def post_order_dft(self, node):
-        pass
+    def post_order_dft(self, node=None):
+
+        if self.left:
+            # don't need an input node bc we print everything in this tree from low to high regardless of the order
+            self.left.post_order_dft()
+
+        if self.right:
+            self.right.post_order_dft()
+
+        print(self.value)
+
+
+# bst = BinarySearchTree(1)
+# bst.insert(8)
+# bst.insert(5)
+# bst.insert(7)
+# bst.insert(6)
+# bst.insert(3)
+# bst.insert(4)
+# bst.insert(2)
+
+# print(bst.in_order_print(bst))
